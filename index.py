@@ -9,7 +9,6 @@ Created on Sun Apr 12 17:39:03 2026
 import pandas as pd
 import re
 import json
-
 import matplotlib.pyplot as plt
 
 # ############
@@ -18,7 +17,7 @@ import matplotlib.pyplot as plt
 """ Loads clean json into a pandas df
     removing the comments in the dataset """
 def load_json(filename):
-    with open(f"/home/mqu/projects/leipziger-wohnsituation/datasets/{filename}", "r", encoding="utf-8") as f:
+    with open(f"datasets/{filename}", "r", encoding="utf-8") as f:
         text = f.read()
     clean_text = re.sub(r"^//.*\n", "", text, flags=re.MULTILINE)
     parsed_data = json.loads(clean_text)
@@ -48,6 +47,15 @@ df_type["jahr"] = pd.to_numeric(df_type["jahr"], errors="coerce")
 df_type = df_type[~(df_type["name"] == "Alleinerziehende ")]
 
 
+# ##############
+# SAVE PLOTS
+# ##############
+def save_plot(plt, name):
+    print(f"Plot created into generated_plots > {name}.png")
+    plt.savefig(f"generated_plots/{name}.png")
+    return True
+
+
 # ################
 # df_size (2010-2023 with missing years)
 # ################
@@ -74,8 +82,8 @@ plt.title("Household Size Distribution Over Time")
 plt.xlabel("Year")
 plt.ylabel("Number of Households")
 plt.grid(True)
-plt.show()
-
+#plt.show()
+save_plot(plt, "1.1 - Household size evolution per year")
 
 # 2. Analysis: average household size evolution per year
 df_household_average = df_size[(df_size["name"] == "Durchschnittliche Haushaltsgröße")].drop(columns = ["merkmal_1"])
@@ -91,7 +99,9 @@ plt.title("Household Size Distribution Over Time")
 plt.xlabel("Year")
 plt.ylabel("Number of Households")
 plt.grid(True)
-plt.show()
+#plt.show()
+save_plot(plt, "1.2 - Avg Household size evolution per year")
+
 
 # ################
 # INITIAL ANALYSIS for df_type (2018-2023)
