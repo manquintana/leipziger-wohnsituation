@@ -90,7 +90,3 @@ Since this affects **50% of the samples**, all *"Alleinerziehende"* rows were re
 - All datasets are structured as time series with categorical breakdowns
 - Some categories are incomplete across years and were excluded when necessary
 - Units were normalized (e.g., `m²` → `sqm`)
-
-## Data source
-
-Manuel Quintana
