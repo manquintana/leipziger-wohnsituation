@@ -1,4 +1,4 @@
-# Housing Data Analysis
+# Leipzig Housing Data Analysis
 
 This project analyzes housing-related data based on three datasets from Leipzig's open data portal. The goal is to explore household composition, housing costs, and living conditions over time.
 
