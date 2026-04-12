@@ -1,0 +1,105 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Apr 12 17:39:03 2026
+
+@author: mqu
+"""
+
+import pandas as pd
+import re
+import json
+
+import matplotlib.pyplot as plt
+
+# ############
+# DATA LOADING
+# ############
+""" Loads clean json into a pandas df
+    removing the comments in the dataset """
+def load_json(filename):
+    with open(f"/home/mqu/projects/leipziger-wohnsituation/datasets/{filename}", "r", encoding="utf-8") as f:
+        text = f.read()
+    clean_text = re.sub(r"^//.*\n", "", text, flags=re.MULTILINE)
+    parsed_data = json.loads(clean_text)
+    return pd.DataFrame(parsed_data)
+
+df_size = load_json("haushaltsgruesse.json")
+df_type = load_json("haushaltstyp.json")
+df_situation = load_json("wohnsituation.json")
+
+
+# ##############
+# DATA CLEANSING
+# ##############
+df_size = df_size.drop(columns = ["merkmal_2", "merkmal_3", "merkmal_4", "periode", "kategorie_Nr", "rubrik_Nr", "jahr_Nr", "uri", "id", "einheit", "kategorie", "rubrik"])
+df_size["wert"] = pd.to_numeric(df_size["wert"], errors="coerce")
+df_size["jahr"] = pd.to_numeric(df_size["jahr"], errors="coerce")
+df_size.loc[(df_size["name"] == "Haushalte") & (df_size["merkmal_1"] == "Haushalte"),"name"] = "Haushalte insgesamt"
+
+df_situation = df_situation.drop(columns = ["merkmal_2", "merkmal_3", "merkmal_4", "periode", "kategorie_Nr", "rubrik_Nr", "jahr_Nr", "uri", "id", "kategorie", "rubrik"])
+df_situation["einheit"] = df_situation["einheit"].replace("m&sup2;", "sqm")
+df_situation["wert"] = pd.to_numeric(df_situation["wert"], errors="coerce")
+df_situation["jahr"] = pd.to_numeric(df_situation["jahr"], errors="coerce")
+
+df_type = df_type.drop(columns = ["merkmal_2", "merkmal_3", "merkmal_4", "periode", "kategorie_Nr", "rubrik_Nr", "jahr_Nr", "uri", "id", "kategorie", "rubrik"])
+df_type["wert"] = pd.to_numeric(df_type["wert"], errors="coerce")
+df_type["jahr"] = pd.to_numeric(df_type["jahr"], errors="coerce")
+df_type = df_type[~(df_type["name"] == "Alleinerziehende ")]
+
+
+# ################
+# df_size (2010-2023 with missing years)
+# ################
+
+# 1. Analysis: Household size evolution per year
+df_household_size = df_size[(df_size["merkmal_1"] == "Haushalte") & (df_size["name"] != "Haushalte insgesamt")]
+df_household_size = df_household_size.rename(columns={"name": "Household size"})
+df_household_size = df_household_size.drop(columns = ["merkmal_1"])
+df_household_size = df_household_size.pivot(
+    index="jahr",
+    columns="Household size",
+    values="wert"
+)
+df_household_size = df_household_size.rename(columns={
+    "eine Person": "1 person",
+    "zwei Personen": "2 persons",
+    "drei Personen": "3 persons",
+    "vier Personen und mehr": "4+ persons"
+})
+df_household_size = df_household_size[["1 person", "2 persons", "3 persons", "4+ persons"]]
+# plot
+df_household_size.plot(marker="o", figsize=(15,10), linestyle="--")
+plt.title("Household Size Distribution Over Time")
+plt.xlabel("Year")
+plt.ylabel("Number of Households")
+plt.grid(True)
+plt.show()
+
+
+# 2. Analysis: average household size evolution per year
+df_household_average = df_size[(df_size["name"] == "Durchschnittliche Haushaltsgröße")].drop(columns = ["merkmal_1"])
+df_household_average = df_household_average.rename(columns={"name": "Household size"})
+df_household_average = df_household_average.pivot(
+    index="jahr",
+    columns="Household size",
+    values="wert"
+)
+# plot
+df_household_average.plot(marker="o", figsize=(15,10), linestyle="--")
+plt.title("Household Size Distribution Over Time")
+plt.xlabel("Year")
+plt.ylabel("Number of Households")
+plt.grid(True)
+plt.show()
+
+# ################
+# INITIAL ANALYSIS for df_type (2018-2023)
+# ################
+
+
+# ################
+# INITIAL ANALYSIS for df_situation (2000-2024)
+# ################
+
+
