@@ -4,14 +4,11 @@ This project analyzes housing-related data based on three datasets from Leipzig'
 
 ## Data Sources
 
-The analysis is based on three data sources provided by "Open Data-Portal der Stadt Leipzig":
+The analysis is based on three data sources provided by "Open Data-Portal der Stadt Leipzig" (under Datenlizenz Deutschland Namensnennung 2.0), all information retrieved on 12.04.2026:
 
 ### 1. `df_size` — Household Size (`haushaltsgruesse.json`)
 
-- dataset: Bautätigkeit und Wohnen / Haushaltsgröße (Jahreszahlen)
-- source: https://statistik.leipzig.de/opendata/api/values?kategorie_nr=6&rubrik_nr=23&periode=y&format=json
-- license: Datenlizenz Deutschland Namensnennung 2.0
-- date: data retrieved on 12.04.2026
+- data source: [Bautätigkeit und Wohnen / Haushaltsgröße (Jahreszahlen)](https://statistik.leipzig.de/opendata/api/values?kategorie_nr=6&rubrik_nr=23&periode=y&format=json)
 
 **Years sampled:**  
 2010, 2015–2023
@@ -27,11 +24,7 @@ The analysis is based on three data sources provided by "Open Data-Portal der St
 - **Average household size**
 
 ### 2. `df_type` — Household Type (`haushaltstyp.json`)
-
-- dataset: Bautätigkeit und Wohnen / Gesamtmietbelastung nach Haushaltstyp (Jahreszahlen)
-- source: https://statistik.leipzig.de/opendata/api/values?kategorie_nr=6&rubrik_nr=27&periode=y&format=json
-- license: Datenlizenz Deutschland Namensnennung 2.0
-- date: data retrieved on 12.04.2026
+- data source: [Bautätigkeit und Wohnen / Gesamtmietbelastung nach Haushaltstyp (Jahreszahlen)](https://statistik.leipzig.de/opendata/api/values?kategorie_nr=6&rubrik_nr=27&periode=y&format=json)
   
 **Years sampled:**  
 2018–2023
@@ -52,11 +45,7 @@ Since this affects **50% of the samples**, all *"Alleinerziehende"* rows were re
 - **Average total rent burden (overall)**
 
 ### 3. `df_situation` — Housing Situation (`wohnsituation.json`)
-
-- dataset: Bautätigkeit und Wohnen / Wohnsituation (Jahreszahlen)
-- source: https://statistik.leipzig.de/opendata/api/values?kategorie_nr=6&rubrik_nr=2&periode=y&format=json
-- license: Datenlizenz Deutschland Namensnennung 2.0
-- date: data retrieved on 12.04.2026
+- data source:[Bautätigkeit und Wohnen / Wohnsituation (Jahreszahlen)](https://statistik.leipzig.de/opendata/api/values?kategorie_nr=6&rubrik_nr=2&periode=y&format=json)
 
 **Years sampled:**  
 2000–2004 (missing 2004), 2005–2024
