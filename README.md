@@ -2,15 +2,16 @@
 
 This project analyzes housing-related data based on three datasets from Leipzig's open data portal. The goal is to explore household composition, housing costs, and living conditions over time.
 
----
-
 ## Data Sources
 
-The analysis is based on three dataframes:
-
----
+The analysis is based on three data sources provided by "Open Data-Portal der Stadt Leipzig":
 
 ### 1. `df_size` — Household Size (`haushaltsgruesse.json`)
+
+- dataset: Bautätigkeit und Wohnen / Haushaltsgröße (Jahreszahlen)
+- source: https://statistik.leipzig.de/opendata/api/values?kategorie_nr=6&rubrik_nr=23&periode=y&format=json
+- license: Datenlizenz Deutschland Namensnennung 2.0
+- date: data retrieved on 12.04.2026
 
 **Years sampled:**  
 2010, 2015–2023
@@ -25,10 +26,13 @@ The analysis is based on three dataframes:
   - Total (sum of subcategories)
 - **Average household size**
 
----
-
 ### 2. `df_type` — Household Type (`haushaltstyp.json`)
 
+- dataset: Bautätigkeit und Wohnen / Gesamtmietbelastung nach Haushaltstyp (Jahreszahlen)
+- source: https://statistik.leipzig.de/opendata/api/values?kategorie_nr=6&rubrik_nr=27&periode=y&format=json
+- license: Datenlizenz Deutschland Namensnennung 2.0
+- date: data retrieved on 12.04.2026
+  
 **Years sampled:**  
 2018–2023
 
@@ -47,9 +51,12 @@ Since this affects **50% of the samples**, all *"Alleinerziehende"* rows were re
   - Single (< 65 years)
 - **Average total rent burden (overall)**
 
----
-
 ### 3. `df_situation` — Housing Situation (`wohnsituation.json`)
+
+- dataset: Bautätigkeit und Wohnen / Wohnsituation (Jahreszahlen)
+- source: https://statistik.leipzig.de/opendata/api/values?kategorie_nr=6&rubrik_nr=2&periode=y&format=json
+- license: Datenlizenz Deutschland Namensnennung 2.0
+- date: data retrieved on 12.04.2026
 
 **Years sampled:**  
 2000–2004 (missing 2004), 2005–2024
@@ -83,15 +90,11 @@ Since this affects **50% of the samples**, all *"Alleinerziehende"* rows were re
 - Own house
 - Other
 
----
-
 ## Data Cleaning
 
 - All duplicated and non-relevant columns were removed
 - Each dataset was reduced from ~16 columns to **4–5 meaningful columns**
 - Missing or inconsistent categories were handled as described above
-
----
 
 ## Notes
 
@@ -99,8 +102,6 @@ Since this affects **50% of the samples**, all *"Alleinerziehende"* rows were re
 - Some categories are incomplete across years and were excluded when necessary
 - Units were normalized (e.g., `m²` → `sqm`)
 
----
-
-## Author
+## Data source
 
 Manuel Quintana
