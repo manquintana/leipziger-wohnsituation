@@ -145,7 +145,7 @@ df_situation_5 = df_situation_5.rename(columns={
     "3-Personen-Haushalte": "3 persons",
     "4- und Mehr-Personen-Haushalte": "4+ persons"
 })
-create_yearly_plot(df_situation_5, "Average rooms number per person over time", "Household Size", "3.2 - Average rooms number per person by household composition over time")
+create_yearly_plot(df_situation_5, "Average rooms number per person over time", "Room number", "3.2 - Average rooms number per person by household composition over time")
 
 
 # 6. Analysis: Average room number per person per age
