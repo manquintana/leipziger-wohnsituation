@@ -116,18 +116,67 @@ create_yearly_plot(df_type_3, "Share of income by Household type spent on housin
 # 4. Analysis: Average sqm per person
 df_situation_4 = df_situation[df_situation["merkmal_1"] == "Durchschnittliche Wohnfläche pro Person"].drop(columns = ["merkmal_1", "einheit"])
 df_situation_4 = df_situation_4[df_situation_4["name"].isin(["1-Personen-Haushalte", "2-Personen-Haushalte", "3-Personen-Haushalte", "4- und Mehr-Personen-Haushalte"])]
-df_situation_4 = df_situation_4.rename(columns={"wert": "sqm", "name" : "Household Composition"})
+df_situation_4 = df_situation_4.rename(columns={"wert": "sqm", "name" : "Household Size"})
 df_situation_4 = df_situation_4.pivot(
     index="jahr",
-    columns="Household Composition",
+    columns="Household Size",
     values="sqm"
 )
-create_yearly_plot(df_situation_4, "Average sqm per person over time", "Household Composition", "3.1 - Average living space in sqm per person by household composition over time")
+df_situation_4 = df_situation_4.rename(columns={
+    "1-Personen-Haushalte": "1 person",
+    "2-Personen-Haushalte": "2 persons",
+    "3-Personen-Haushalte": "3 persons",
+    "4- und Mehr-Personen-Haushalte": "4+ persons"
+})
+create_yearly_plot(df_situation_4, "Average sqm per person over time", "Household Size", "3.1 - Average living space in sqm per person by household composition over time")
 
-# 5. Analysis: Average room number per person
+# 5. Analysis: Average room number per person per household size
+df_situation_5 = df_situation[df_situation["merkmal_1"] == "Durchschnittliche Raumanzahl pro Person"].drop(columns = ["merkmal_1", "einheit"])
+df_situation_5 = df_situation_5[~(df_situation_5["name"] == "Haushalte insgesamt") & (df_situation_5["name"].isin(["1-Personen-Haushalte","2-Personen-Haushalte","3-Personen-Haushalte","4- und Mehr-Personen-Haushalte"]))]
+df_situation_5 = df_situation_5.rename(columns={"wert": "# rooms", "name" : "Household Size"})
+df_situation_5 = df_situation_5.pivot(
+    index="jahr",
+    columns="Household Size",
+    values="# rooms"
+)
+df_situation_5 = df_situation_5.rename(columns={
+    "1-Personen-Haushalte": "1 person",
+    "2-Personen-Haushalte": "2 persons",
+    "3-Personen-Haushalte": "3 persons",
+    "4- und Mehr-Personen-Haushalte": "4+ persons"
+})
+create_yearly_plot(df_situation_5, "Average rooms number per person over time", "Household Size", "3.2 - Average rooms number per person by household composition over time")
 
-    
-# 6. Analysis: Property regime
+
+# 6. Analysis: Average room number per person per age
+df_situation_6 = df_situation[df_situation["merkmal_1"] == "Durchschnittliche Raumanzahl pro Person"].drop(columns = ["merkmal_1", "einheit"])
+df_situation_6 = df_situation_6[~(df_situation_6["name"] == "Haushalte insgesamt") & (df_situation_6["name"].isin(["18 bis unter 35 Jahre", "35 bis unter 55 Jahre", "über 55 Jahre"]))]
+df_situation_6 = df_situation_6.rename(columns={"wert": "# rooms", "name" : "Age range"})
+df_situation_6 = df_situation_6.pivot(
+    index="jahr",
+    columns="Age range",
+    values="# rooms"
+)
+df_situation_6 = df_situation_6.rename(columns={
+    "18 bis unter 35 Jahre": "18-35 years old",
+    "35 bis unter 55 Jahre": "35-55 years old",
+    "über 55 Jahre": "55+ years old"
+})
+create_yearly_plot(df_situation_6, "Average rooms number per person over time", "Age range", "3.3 - Average rooms number per person by age range over time")
 
 
-
+# 7. Analysis: Property regime
+df_situation_7 = df_situation[df_situation["merkmal_1"] == "Wohnstatus der Haushalte"].drop(columns = ["merkmal_1", "einheit"])
+df_situation_7 = df_situation_7.rename(columns={"wert": "% of houses", "name" : "Property regime"})
+df_situation_7 = df_situation_7.pivot(
+    index="jahr",
+    columns="Property regime",
+    values="% of houses"
+)
+df_situation_7 = df_situation_7.rename(columns={
+    "Eigenes Haus": "House owner",
+    "Eigentumswohnung": "Appartment/condo owner",
+    "Mietwohnung oder gemietetes Haus":"Renting",
+    "Sonstiges": "Other"
+})
+create_yearly_plot(df_situation_7, "Property regime percentage over time", "Property regime", "3.4 - Property regime percentage over time")
