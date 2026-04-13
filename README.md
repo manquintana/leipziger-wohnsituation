@@ -1,7 +1,16 @@
-# Leipzig Housing Data Analysis
+# Leipzig Housing Data Analysis 🏚️
 
 This project analyzes housing-related data based on three datasets from Leipzig's open data portal. The goal is to explore household composition, housing costs, and living conditions over time.
 
+---
+
+## tl;dr (for full analysis and graphics jump to "📊 Insights" section)
+
+- The data reveals a clear shift toward **smaller, more individual households**, combined with **high dependence on renting**.
+- Younger and single households are apparently the most **economically constrained**, while older individuals tend to have **more space and rooms per person**.
+
+---
+  
 ## Data Sources
 
 The analysis is based on three data sources provided by "Open Data-Portal der Stadt Leipzig" (under Datenlizenz Deutschland Namensnennung 2.0), all information retrieved on 12.04.2026:
@@ -150,9 +159,3 @@ Since this affects **50% of the samples**, all *"Alleinerziehende"* rows were re
 
 - The majority of households are **renting**, with a consistently high percentage (~85%).
 - Home ownership (houses and apartments)** remains relatively low and stable.
-
-
-# tl;dr
-
-- The data reveals a clear shift toward **smaller, more individual households**, combined with **high dependence on renting**.
-- Younger and single households are apparently the most **economically constrained**, while older individuals tend to have **more space and rooms per person**.
