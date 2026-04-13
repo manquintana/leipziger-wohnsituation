@@ -78,15 +78,16 @@ df_household_size = df_household_size.rename(columns={
 df_household_size = df_household_size[["1 person", "2 persons", "3 persons", "4+ persons"]]
 # plot
 df_household_size.plot(marker="o", figsize=(15,10), linestyle="--")
-plt.title("Household Size Distribution Over Time")
+plt.title("Household size distribution over time")
 plt.xlabel("Year")
 plt.ylabel("Number of Households")
 plt.grid(True)
 #plt.show()
-save_plot(plt, "1.1 - Household size evolution per year")
+save_plot(plt, "1.1 - Household size evolution over time")
 
 # 2. Analysis: average household size evolution per year
 df_household_average = df_size[(df_size["name"] == "Durchschnittliche Haushaltsgröße")].drop(columns = ["merkmal_1"])
+df_household_average["name"] = "Average Household size"
 df_household_average = df_household_average.rename(columns={"name": "Household size"})
 df_household_average = df_household_average.pivot(
     index="jahr",
@@ -100,12 +101,28 @@ plt.xlabel("Year")
 plt.ylabel("Number of Households")
 plt.grid(True)
 #plt.show()
-save_plot(plt, "1.2 - Avg Household size evolution per year")
+save_plot(plt, "1.2 - Average household size distribution over time")
 
 
 # ################
 # INITIAL ANALYSIS for df_type (2018-2023)
 # ################
+# 3. Analysis: Average rent % evolution per year
+df_rent_perc = df_type[~(df_type["name"] == "insgesamt")].drop(columns = ["merkmal_1", "einheit"])
+df_rent_perc = df_rent_perc.rename(columns={"wert": "Percentage of income", "name" : "Household Type"})
+df_rent_perc = df_rent_perc.pivot(
+    index="jahr",
+    columns="Household Type",
+    values="Percentage of income"
+)
+df_rent_perc = df_rent_perc[["Alleinstehende < 65 J. ", "Alleinstehende Rentner", "Paare ohne Kind", "Paare mit Kind(ern)", "Rentnerpaare"]]
+df_rent_perc.plot(marker="o", figsize=(15,10), linestyle="--")
+plt.title("Share of income by Household type spent on housing over time")
+plt.xlabel("Year")
+plt.ylabel("% of net income")
+plt.grid(True)
+#plt.show()
+save_plot(plt, "2.1 - Share of income by Household type spent on housing over time")
 
 
 # ################
