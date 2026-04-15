@@ -10,7 +10,7 @@ This project analyzes housing-related data based on three datasets from Leipzig'
 - Younger and single households are apparently the most **economically constrained**, while older individuals tend to have **more space and rooms per person**.
 
 ---
-  
+
 ## Data Sources
 
 The analysis is based on three data sources provided by "Open Data-Portal der Stadt Leipzig" (under Datenlizenz Deutschland Namensnennung 2.0), all information retrieved on 12.04.2026:
@@ -19,7 +19,7 @@ The analysis is based on three data sources provided by "Open Data-Portal der St
 
 - data source: [Bautätigkeit und Wohnen / Haushaltsgröße (Jahreszahlen)](https://statistik.leipzig.de/opendata/api/values?kategorie_nr=6&rubrik_nr=23&periode=y&format=json)
 
-**Years sampled:**  
+**Years sampled:**
 2010, 2015–2023
 
 **Categories per year:**
@@ -34,13 +34,13 @@ The analysis is based on three data sources provided by "Open Data-Portal der St
 
 ### 2. `df_type` — Household Type (`haushaltstyp.json`)
 - data source: [Bautätigkeit und Wohnen / Gesamtmietbelastung nach Haushaltstyp (Jahreszahlen)](https://statistik.leipzig.de/opendata/api/values?kategorie_nr=6&rubrik_nr=27&periode=y&format=json)
-  
-**Years sampled:**  
+
+**Years sampled:**
 2018–2023
 
 **Data cleaning note:**
 
-For the years **2018, 2020, and 2022**, data for *"Alleinerziehende"* (single parents) is missing (only *"Alleinstehende < 65 J."* is present).  
+For the years **2018, 2020, and 2022**, data for *"Alleinerziehende"* (single parents) is missing (only *"Alleinstehende < 65 J."* is present).
 Since this affects **50% of the samples**, all *"Alleinerziehende"* rows were removed from the analysis.
 
 **Categories per year:**
@@ -56,7 +56,7 @@ Since this affects **50% of the samples**, all *"Alleinerziehende"* rows were re
 ### 3. `df_situation` — Housing Situation (`wohnsituation.json`)
 - data source:[Bautätigkeit und Wohnen / Wohnsituation (Jahreszahlen)](https://statistik.leipzig.de/opendata/api/values?kategorie_nr=6&rubrik_nr=2&periode=y&format=json)
 
-**Years sampled:**  
+**Years sampled:**
 2000–2004 (missing 2004), 2005–2024
 
 **Categories per year:**
@@ -91,8 +91,9 @@ Since this affects **50% of the samples**, all *"Alleinerziehende"* rows were re
 ## Data Cleaning
 
 - All duplicated and non-relevant columns were removed
-- Each dataset was reduced from ~16 columns to **4–5 meaningful columns**
+- Each dataset was reduced from ~16 columns to **5 meaningful columns**
 - Missing or inconsistent categories were handled as described above
+- A cleaned dataset can be found under "datasets/full_cleaned_data.json"
 
 ## Notes
 

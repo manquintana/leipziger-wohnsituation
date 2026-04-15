@@ -31,10 +31,11 @@ df_situation = load_json("wohnsituation.json")
 # ##############
 # DATA CLEANSING
 # ##############
-df_size = df_size.drop(columns = ["merkmal_2", "merkmal_3", "merkmal_4", "periode", "kategorie_Nr", "rubrik_Nr", "jahr_Nr", "uri", "id", "einheit", "kategorie", "rubrik"])
+df_size = df_size.drop(columns = ["merkmal_2", "merkmal_3", "merkmal_4", "periode", "kategorie_Nr", "rubrik_Nr", "jahr_Nr", "uri", "id", "kategorie", "rubrik"])
 df_size["wert"] = pd.to_numeric(df_size["wert"], errors="coerce")
 df_size["jahr"] = pd.to_numeric(df_size["jahr"], errors="coerce")
 df_size.loc[(df_size["name"] == "Haushalte") & (df_size["merkmal_1"] == "Haushalte"),"name"] = "Haushalte insgesamt"
+df_size["einheit"] = "Anzahl"
 
 df_situation = df_situation.drop(columns = ["merkmal_2", "merkmal_3", "merkmal_4", "periode", "kategorie_Nr", "rubrik_Nr", "jahr_Nr", "uri", "id", "kategorie", "rubrik"])
 df_situation["einheit"] = df_situation["einheit"].replace("m&sup2;", "sqm")
@@ -46,6 +47,8 @@ df_type["wert"] = pd.to_numeric(df_type["wert"], errors="coerce")
 df_type["jahr"] = pd.to_numeric(df_type["jahr"], errors="coerce")
 df_type = df_type[~(df_type["name"] == "Alleinerziehende ")]
 
+df_sanitized_dataset = pd.concat([df_size, df_situation, df_type], ignore_index=True)
+df_sanitized_dataset.to_json("datasets/full_cleaned_data.json", orient="records", indent=2)
 
 # ##############
 # SAVE PLOTS
@@ -84,7 +87,7 @@ df_size_1 = df_size_1[["1 person", "2 persons", "3 persons", "4+ persons"]]
 create_yearly_plot(df_size_1, "Household size distribution over time", "Number of Households", "1.1 - Household size evolution over time")
 
 # 2. Analysis: average household size evolution per year
-df_size_2 = df_size[(df_size["name"] == "Durchschnittliche Haushaltsgröße")].drop(columns = ["merkmal_1"])
+df_size_2 = df_size[(df_size["name"] == "Durchschnittliche Haushaltsgröße")].drop(columns = ["merkmal_1", "einheit"])
 df_size_2["name"] = "Average Household size"
 df_size_2 = df_size_2.rename(columns={"name": "Household size"})
 df_size_2 = df_size_2.pivot(
