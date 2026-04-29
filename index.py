@@ -55,7 +55,7 @@ df_sanitized_dataset.to_json("datasets/full_cleaned_data.json", orient="records"
 # ##############
 def create_yearly_plot(dataframe, title, y_label, name):
     dataframe.plot(marker="o", figsize=(15,10), linestyle="--")
-    plt.title(title)
+    plt.title(title, fontsize = 20)
     plt.xlabel("Year")
     plt.ylabel(y_label)
     plt.grid(True)
@@ -95,7 +95,7 @@ df_size_2 = df_size_2.pivot(
     columns="Household size",
     values="wert"
 )
-create_yearly_plot(df_size_2, "Average household size distribution over time", "Number of Households", "1.2 - Average household size distribution over time")
+create_yearly_plot(df_size_2, "Average household size distribution over time", "Average household size", "1.2 - Average household size distribution over time")
 
 
 # ################
@@ -131,7 +131,7 @@ df_situation_4 = df_situation_4.rename(columns={
     "3-Personen-Haushalte": "3 persons",
     "4- und Mehr-Personen-Haushalte": "4+ persons"
 })
-create_yearly_plot(df_situation_4, "Average sqm per person over time", "Household Size", "3.1 - Average living space in sqm per person by household composition over time")
+create_yearly_plot(df_situation_4, "Average sqm per person over time", "Size [sqm]", "3.1 - Average living space in sqm per person by household composition over time")
 
 # 5. Analysis: Average room number per person per household size
 df_situation_5 = df_situation[df_situation["merkmal_1"] == "Durchschnittliche Raumanzahl pro Person"].drop(columns = ["merkmal_1", "einheit"])
