@@ -2,14 +2,12 @@
 
 This project analyzes housing-related data based on three datasets from Leipzig's open data portal. The goal is to explore household composition, housing costs, and living conditions over time.
 
----
 
 ## tl;dr (for full analysis and graphics jump to "📊 Insights" section)
 
 - The data reveals a clear shift toward **smaller, more individual households**, combined with **high dependence on renting**.
 - Younger and single households are apparently the most **economically constrained**, while older individuals tend to have **more space and rooms per person**.
 
----
 
 ## Data Sources
 
@@ -101,7 +99,6 @@ Since this affects **50% of the samples**, all *"Alleinerziehende"* rows were re
 - Some categories are incomplete across years and were excluded when necessary
 - Units were normalized (e.g., `m²` → `sqm`)
 
----
 
 # 📊 Insights
 
@@ -112,7 +109,6 @@ Since this affects **50% of the samples**, all *"Alleinerziehende"* rows were re
 - This suggests a long-term trend toward smaller households.
 - The decrease is gradual but consistent, indicating demographic changes.
 
----
 
 ## 2. Household Size Distribution
 <img src="/generated_plots/1.2%20-%20Average%20household%20size%20distribution%20over%20time.png" width="100%" />
@@ -120,7 +116,6 @@ Since this affects **50% of the samples**, all *"Alleinerziehende"* rows were re
 - **Single-person households are always increasing** over time.
 - Households with 2 or more people are stable.
 
----
 
 ## 3. Housing Cost Burden by Household Type
 <img src="/generated_plots/2.1%20-%20Share%20of%20income%20by%20Household%20type%20spent%20on%20housing%20over%20time.png" width="100%" />
@@ -128,7 +123,6 @@ Since this affects **50% of the samples**, all *"Alleinerziehende"* rows were re
 - **Single-person households and retirees living alone have the highest housing cost**.
 - Couples without children pay always the lowest.
 
----
 
 ## 4. Average Living Space per Person
 <img src="/generated_plots/3.1%20-%20Average%20living%20space%20in%20sqm%20per%20person%20by%20household%20composition%20over%20time.png" width="100%" />
@@ -137,7 +131,6 @@ Since this affects **50% of the samples**, all *"Alleinerziehende"* rows were re
 - Single-person households have **significantly more space per person than larger households**.
 - Over time there is a slight upward trend across all household types.
 
----
 
 ## 5. Rooms per Person by Household Size
 <img src="/generated_plots/3.2%20-%20Average%20rooms%20number%20per%20person%20by%20household%20composition%20over%20time.png" width="100%" />
@@ -145,7 +138,6 @@ Since this affects **50% of the samples**, all *"Alleinerziehende"* rows were re
 - Smaller households offer more rooms per person than larger households.
 - The gap between small and large households remains constant over time.
 
----
 
 ## 6. Rooms per Person by Age Group
 <img src="/generated_plots/3.3%20-%20Average%20rooms%20number%20per%20person%20by%20age%20range%20over%20time.png" width="100%" />
@@ -153,10 +145,9 @@ Since this affects **50% of the samples**, all *"Alleinerziehende"* rows were re
 - **Older age groups have more rooms per person than younger groups**.
 - A **slight increase over time** is visible for older groups, maybe accumulated wealth?
 
----
 
 ## 7. Property Regime Distribution
 <img src="/generated_plots/3.4%20-%20Property%20regime%20percentage%20over%20time.png" width="100%" />
 
 - The majority of households are **renting**, with a consistently high percentage (~85%).
-- Home ownership (houses and apartments)** remains relatively low and stable.
+- Home ownership (houses and apartments) remains relatively low and stable.
